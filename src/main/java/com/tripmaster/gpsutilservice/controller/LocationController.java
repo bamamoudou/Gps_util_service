@@ -13,25 +13,36 @@ import com.tripmaster.gpsutilservice.model.AttractionListWrapper;
 import com.tripmaster.gpsutilservice.service.LocationService;
 
 import gpsUtil.location.VisitedLocation;
+import io.swagger.annotations.Api;
 
 @RestController
+@Api(description="Location microservice for TourGuide")
 public class LocationController {
-	@Autowired
-	private LocationService locationService;
-	private final Logger logger = LoggerFactory.getLogger(LocationController.class);
+	  @Autowired
+	    private LocationService locationService;
+	    private final Logger logger = LoggerFactory.getLogger(LocationController.class);
 
-	@RequestMapping("/user-location")
-	public VisitedLocation getUserLocation(@RequestParam String userId) {
-		VisitedLocation visitedLocation = locationService.getUserLocation(UUID.fromString(userId));
-		logger.debug("Request made to getUserLocation");
-		return visitedLocation;
-	}
+	    /**
+	     * Gets a user's last visited location
+	     * @param userId
+	     * @return visited location
+	     */
+	    @RequestMapping("/user-location")
+	    public VisitedLocation getUserLocation(@RequestParam String userId) {
+	        VisitedLocation visitedLocation = locationService.getUserLocation(UUID.fromString(userId));
+	        logger.debug("Request made to getUserLocation");
+	        return visitedLocation;
+	    }
 
-	@RequestMapping("/attractions")
-	public AttractionListWrapper getAttractions() {
-		AttractionListWrapper attractionListWrapper = new AttractionListWrapper();
-		attractionListWrapper.setAttractionList(locationService.getAttractions());
-		logger.debug("Request made to getAttractions");
-		return attractionListWrapper;
-	}
+	    /**
+	     * Gets a list of all attractions
+	     * @return list of all attractions
+	     */
+	    @RequestMapping("/attractions")
+	    public AttractionListWrapper getAttractions() {
+	        AttractionListWrapper attractionListWrapper = new AttractionListWrapper();
+	        attractionListWrapper.setAttractionList(locationService.getAttractions());
+	        logger.debug("Request made to getAttractions");
+	        return attractionListWrapper;
+	    }
 }
