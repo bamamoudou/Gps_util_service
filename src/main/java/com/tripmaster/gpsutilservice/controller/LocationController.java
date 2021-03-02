@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jsoniter.output.JsonStream;
+import com.tripmaster.gpsutilservice.model.AttractionListWrapper;
 import com.tripmaster.gpsutilservice.service.LocationService;
 
 import gpsUtil.location.VisitedLocation;
@@ -21,15 +21,17 @@ public class LocationController {
 	private final Logger logger = LoggerFactory.getLogger(LocationController.class);
 
 	@RequestMapping("/user-location")
-	public String getUserLocation(@RequestParam String userID) {
-		VisitedLocation visitedLocation = locationService.getUserLocation(UUID.fromString(userID));
+	public VisitedLocation getUserLocation(@RequestParam String userId) {
+		VisitedLocation visitedLocation = locationService.getUserLocation(UUID.fromString(userId));
 		logger.debug("Request made to getUserLocation");
-		return JsonStream.serialize(visitedLocation.location);
+		return visitedLocation;
 	}
 
 	@RequestMapping("/attractions")
-	public String getAttractions() {
+	public AttractionListWrapper getAttractions() {
+		AttractionListWrapper attractionListWrapper = new AttractionListWrapper();
+		attractionListWrapper.setAttractionList(locationService.getAttractions());
 		logger.debug("Request made to getAttractions");
-		return JsonStream.serialize(locationService.getAttractions());
+		return attractionListWrapper;
 	}
 }
