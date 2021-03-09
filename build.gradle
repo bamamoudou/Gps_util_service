@@ -3,7 +3,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java-library'
 	id 'idea'
-	id 'jacoco'
+	
 }
 
 group = 'com.tripmaster'
@@ -15,7 +15,7 @@ repositories {
 }
 
 bootJar {
-    baseName = 'tourGuide'
+    baseName = 'gpsutil_api'
     version =  '1.0.0'
 }
 
@@ -33,8 +33,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compile("org.springframework.boot:spring-boot-starter-actuator")
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    //compile group: 'tripmaster', name : 'common', version : '1.0' 
-    compile(name:'common', ext:'jar') 
+    compile group: 'org.javamoney', name: 'moneta', version: '1.3'
+    compile group: 'com.jsoniter', name: 'jsoniter', version: '0.9.23'
 	
     compile(name:'gpsUtil', ext:'jar')
 
@@ -43,32 +43,4 @@ dependencies {
  testCompile("junit:junit")
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.1.6.RELEASE'
 
-}
-
-
-jacoco {
-    toolVersion = "0.8.4"
-}
-
-jacocoTestReport {
-    reports {
-        xml.enabled true
-        csv.enabled false
-        html.destination file("${buildDir}/jacocoHtml")
-    }
-}
-
-test.finalizedBy jacocoTestReport
-check.dependsOn jacocoTestCoverageVerification
-
-jacocoTestCoverageVerification {
-  violationRules {
-    rule {
-      limit {
-        counter = 'LINE'
-        value = 'COVEREDRATIO'
-        minimum = 0.5
-      }
-    }
-  }
 }
