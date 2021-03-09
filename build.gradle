@@ -1,7 +1,7 @@
 plugins {
 	id 'org.springframework.boot' version '2.4.2'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
+	id 'java-library'
 	id 'idea'
 	id 'jacoco'
 }
@@ -33,13 +33,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compile("org.springframework.boot:spring-boot-starter-actuator")
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    compile group: 'org.javamoney', name: 'moneta', version: '1.3'
-	compile group: 'com.jsoniter', name: 'jsoniter', version: '0.9.23'
-
-    
-    compile group: 'io.springfox', name: 'springfox-swagger2', version: '3.0.0'
-    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '3.0.0'
+    //compile group: 'tripmaster', name : 'common', version : '1.0' 
+    compile(name:'common', ext:'jar') 
 	
     compile(name:'gpsUtil', ext:'jar')
 

@@ -5,10 +5,13 @@ import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class GpsutilserviceApplicationTests {
+public class GpsutilserviceApplicationTests {
+	
+	public GpsutilserviceApplicationTests() {
+	}
 
 	@Test
-	void contextLoads() {
+	public void contextLoads() {
 	}
 
 }
